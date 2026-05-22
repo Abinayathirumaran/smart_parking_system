@@ -6,19 +6,19 @@ A modern React-based parking slot booking application that allows users to brows
 ## Screenshots### Landing
 
 ### Signup
-![SignUp](./assets/signup.png)
+![SignUp](./src/assets/signup.png)
 
 ### Landing
-![Landing](./assets/landing.png)
+![Landing](./src/assets/landing.png)
 
 ### Dashboard
-![Dashboard](./assets/dashboard.png)
+![Dashboard](./src/assets/dashboard.png)
 
 ### Slot Area
-![Slot Area](./assets/slotarea.png)
+![Slot Area](./src/assets/slotarea.png)
 
 ### Details
-![Slot Detail](./assets/detailpage.png)
+![Slot Detail](./src/assets/detailpage.png)
 
 ## Features
 
