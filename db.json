@@ -1,0 +1,1072 @@
+{
+  "users": [
+    {
+      "username": "Abinaya",
+      "email": "abi@mail.com",
+      "password": "a123456",
+      "id": "c7LJjMzYzZI"
+    },
+    {
+      "username": "Shiva",
+      "email": "shiva@mail.com",
+      "password": "s123456",
+      "id": "zt7dZGf2Jac"
+    },
+    {
+      "username": "Darwin",
+      "email": "darwin@mail.com",
+      "password": "d123456",
+      "id": "SjFNMoVroXI"
+    },
+    {
+      "username": "Darwin",
+      "email": "asdas@mail.com",
+      "password": "332dads",
+      "id": "WWWYK5ohJPA"
+    },
+    {
+      "username": "kjKJChkjhhlkalk",
+      "email": "asdkanskn@mail.com",
+      "password": "hsgds786",
+      "id": "9pId5oTT9ew"
+    },
+    {
+      "username": "adasdas",
+      "email": "ahkjahj@mail.com",
+      "password": "343124aaas",
+      "id": "3s7IL9zAWTw"
+    }
+  ],
+  "parkingLots": [
+    {
+      "id": "1",
+      "name": "Phoenix Mall",
+      "location": "Velachery, Chennai",
+      "image": "https://i.pinimg.com/1200x/c8/6a/62/c86a62720250bf9ebca9dc6717725767.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Express Avenue",
+      "location": "Royapettah, Chennai",
+      "image": "https://i.pinimg.com/736x/cc/42/a9/cc42a9bb9ecaaae282f9ffb73e1204c8.jpg"
+    },
+    {
+      "id": "3",
+      "name": "VR Chennai",
+      "location": "Anna Nagar, Chennai",
+      "image": "https://i.pinimg.com/736x/83/ee/ff/83eeff9277111fce6a85439e2d69a713.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Forum Vijaya Mall",
+      "location": "Vadapalani, Chennai",
+      "image": "https://i.pinimg.com/736x/64/2e/b8/642eb8544bd3710c793b19094cfed112.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Grand Square Mall",
+      "location": "Velachery, Chennai",
+      "image": "https://i.pinimg.com/736x/ec/10/af/ec10afb055fce3bd2179eaa91180a73a.jpg"
+    }
+  ],
+  "slots": [
+    {
+      "id": "1",
+      "parkingId": 1,
+      "floor": 1,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "2",
+      "parkingId": 1,
+      "floor": 1,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "3",
+      "parkingId": 1,
+      "floor": 1,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "4",
+      "parkingId": 1,
+      "floor": 1,
+      "slotNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "id": "5",
+      "parkingId": 1,
+      "floor": 1,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "6",
+      "parkingId": 1,
+      "floor": 2,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "7",
+      "parkingId": 1,
+      "floor": 2,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "8",
+      "parkingId": 1,
+      "floor": 2,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "9",
+      "parkingId": 1,
+      "floor": 2,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "10",
+      "parkingId": 1,
+      "floor": 2,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "11",
+      "parkingId": 1,
+      "floor": 3,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "12",
+      "parkingId": 1,
+      "floor": 3,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "13",
+      "parkingId": 1,
+      "floor": 3,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "14",
+      "parkingId": 1,
+      "floor": 3,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "15",
+      "parkingId": 1,
+      "floor": 3,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "16",
+      "parkingId": 1,
+      "floor": 4,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "17",
+      "parkingId": 1,
+      "floor": 4,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "18",
+      "parkingId": 1,
+      "floor": 4,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "19",
+      "parkingId": 1,
+      "floor": 4,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "20",
+      "parkingId": 1,
+      "floor": 4,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "21",
+      "parkingId": 1,
+      "floor": 5,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "22",
+      "parkingId": 1,
+      "floor": 5,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "23",
+      "parkingId": 1,
+      "floor": 5,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "24",
+      "parkingId": 1,
+      "floor": 5,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "25",
+      "parkingId": 1,
+      "floor": 5,
+      "slotNumber": "A5",
+      "status": "booked"
+    },
+    {
+      "id": "26",
+      "parkingId": 2,
+      "floor": 1,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "27",
+      "parkingId": 2,
+      "floor": 1,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "28",
+      "parkingId": 2,
+      "floor": 1,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "29",
+      "parkingId": 2,
+      "floor": 1,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "30",
+      "parkingId": 2,
+      "floor": 1,
+      "slotNumber": "A5",
+      "status": "booked"
+    },
+    {
+      "id": "31",
+      "parkingId": 2,
+      "floor": 2,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "32",
+      "parkingId": 2,
+      "floor": 2,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "33",
+      "parkingId": 2,
+      "floor": 2,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "34",
+      "parkingId": 2,
+      "floor": 2,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "35",
+      "parkingId": 2,
+      "floor": 2,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "36",
+      "parkingId": 2,
+      "floor": 3,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "37",
+      "parkingId": 2,
+      "floor": 3,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "38",
+      "parkingId": 2,
+      "floor": 3,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "39",
+      "parkingId": 2,
+      "floor": 3,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "40",
+      "parkingId": 2,
+      "floor": 3,
+      "slotNumber": "A5",
+      "status": "booked"
+    },
+    {
+      "id": "41",
+      "parkingId": 2,
+      "floor": 4,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "42",
+      "parkingId": 2,
+      "floor": 4,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "43",
+      "parkingId": 2,
+      "floor": 4,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "44",
+      "parkingId": 2,
+      "floor": 4,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "45",
+      "parkingId": 2,
+      "floor": 4,
+      "slotNumber": "A5",
+      "status": "booked"
+    },
+    {
+      "id": "46",
+      "parkingId": 2,
+      "floor": 5,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "47",
+      "parkingId": 2,
+      "floor": 5,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "48",
+      "parkingId": 2,
+      "floor": 5,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "49",
+      "parkingId": 2,
+      "floor": 5,
+      "slotNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "id": "50",
+      "parkingId": 2,
+      "floor": 5,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "51",
+      "parkingId": 3,
+      "floor": 1,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "52",
+      "parkingId": 3,
+      "floor": 1,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "53",
+      "parkingId": 3,
+      "floor": 1,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "54",
+      "parkingId": 3,
+      "floor": 1,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "55",
+      "parkingId": 3,
+      "floor": 1,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "56",
+      "parkingId": 3,
+      "floor": 2,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "57",
+      "parkingId": 3,
+      "floor": 2,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "58",
+      "parkingId": 3,
+      "floor": 2,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "59",
+      "parkingId": 3,
+      "floor": 2,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "60",
+      "parkingId": 3,
+      "floor": 2,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "61",
+      "parkingId": 3,
+      "floor": 3,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "62",
+      "parkingId": 3,
+      "floor": 3,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "63",
+      "parkingId": 3,
+      "floor": 3,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "64",
+      "parkingId": 3,
+      "floor": 3,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "65",
+      "parkingId": 3,
+      "floor": 3,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "66",
+      "parkingId": 3,
+      "floor": 4,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "67",
+      "parkingId": 3,
+      "floor": 4,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "68",
+      "parkingId": 3,
+      "floor": 4,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "69",
+      "parkingId": 3,
+      "floor": 4,
+      "slotNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "id": "70",
+      "parkingId": 3,
+      "floor": 4,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "71",
+      "parkingId": 3,
+      "floor": 5,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "72",
+      "parkingId": 3,
+      "floor": 5,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "73",
+      "parkingId": 3,
+      "floor": 5,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "74",
+      "parkingId": 3,
+      "floor": 5,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "75",
+      "parkingId": 3,
+      "floor": 5,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "76",
+      "parkingId": 4,
+      "floor": 1,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "77",
+      "parkingId": 4,
+      "floor": 1,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "78",
+      "parkingId": 4,
+      "floor": 1,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "79",
+      "parkingId": 4,
+      "floor": 1,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "80",
+      "parkingId": 4,
+      "floor": 1,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "81",
+      "parkingId": 4,
+      "floor": 2,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "82",
+      "parkingId": 4,
+      "floor": 2,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "83",
+      "parkingId": 4,
+      "floor": 2,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "84",
+      "parkingId": 4,
+      "floor": 2,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "85",
+      "parkingId": 4,
+      "floor": 2,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "86",
+      "parkingId": 4,
+      "floor": 3,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "87",
+      "parkingId": 4,
+      "floor": 3,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "88",
+      "parkingId": 4,
+      "floor": 3,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "89",
+      "parkingId": 4,
+      "floor": 3,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "90",
+      "parkingId": 4,
+      "floor": 3,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "91",
+      "parkingId": 4,
+      "floor": 4,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "92",
+      "parkingId": 4,
+      "floor": 4,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "93",
+      "parkingId": 4,
+      "floor": 4,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "94",
+      "parkingId": 4,
+      "floor": 4,
+      "slotNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "id": "95",
+      "parkingId": 4,
+      "floor": 4,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "96",
+      "parkingId": 4,
+      "floor": 5,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "97",
+      "parkingId": 4,
+      "floor": 5,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "98",
+      "parkingId": 4,
+      "floor": 5,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "99",
+      "parkingId": 4,
+      "floor": 5,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "100",
+      "parkingId": 4,
+      "floor": 5,
+      "slotNumber": "A5",
+      "status": "booked"
+    },
+    {
+      "id": "101",
+      "parkingId": 5,
+      "floor": 1,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "102",
+      "parkingId": 5,
+      "floor": 1,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "103",
+      "parkingId": 5,
+      "floor": 1,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "104",
+      "parkingId": 5,
+      "floor": 1,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "105",
+      "parkingId": 5,
+      "floor": 1,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "106",
+      "parkingId": 5,
+      "floor": 2,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "107",
+      "parkingId": 5,
+      "floor": 2,
+      "slotNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "id": "108",
+      "parkingId": 5,
+      "floor": 2,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "109",
+      "parkingId": 5,
+      "floor": 2,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "110",
+      "parkingId": 5,
+      "floor": 2,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "111",
+      "parkingId": 5,
+      "floor": 3,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "112",
+      "parkingId": 5,
+      "floor": 3,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "113",
+      "parkingId": 5,
+      "floor": 3,
+      "slotNumber": "A3",
+      "status": "booked"
+    },
+    {
+      "id": "114",
+      "parkingId": 5,
+      "floor": 3,
+      "slotNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "id": "115",
+      "parkingId": 5,
+      "floor": 3,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "116",
+      "parkingId": 5,
+      "floor": 4,
+      "slotNumber": "A1",
+      "status": "available"
+    },
+    {
+      "id": "117",
+      "parkingId": 5,
+      "floor": 4,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "118",
+      "parkingId": 5,
+      "floor": 4,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "119",
+      "parkingId": 5,
+      "floor": 4,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "120",
+      "parkingId": 5,
+      "floor": 4,
+      "slotNumber": "A5",
+      "status": "available"
+    },
+    {
+      "id": "121",
+      "parkingId": 5,
+      "floor": 5,
+      "slotNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "id": "122",
+      "parkingId": 5,
+      "floor": 5,
+      "slotNumber": "A2",
+      "status": "available"
+    },
+    {
+      "id": "123",
+      "parkingId": 5,
+      "floor": 5,
+      "slotNumber": "A3",
+      "status": "available"
+    },
+    {
+      "id": "124",
+      "parkingId": 5,
+      "floor": 5,
+      "slotNumber": "A4",
+      "status": "available"
+    },
+    {
+      "id": "125",
+      "parkingId": 5,
+      "floor": 5,
+      "slotNumber": "A5",
+      "status": "booked"
+    }
+  ],
+  "bookings": [
+    {
+      "userId": "c7LJjMzYzZI",
+      "username": "Abinaya",
+      "email": "abi@mail.com",
+      "phone": "9876543210",
+      "vehicleName": "BMW",
+      "vehicleNumber": "DG6578",
+      "selectedHours": 1,
+      "pricePerHour": 30,
+      "totalAmount": 30,
+      "slotNumber": "A1",
+      "floor": 1,
+      "slotId": "1",
+      "parkingName": "Phoenix Mall",
+      "parkingLocation": "Velachery, Chennai",
+      "startTime": "2026-05-16T16:12:27.272Z",
+      "endTime": "2026-05-16T17:12:27.272Z",
+      "bookingDate": "2026-05-16T16:12:27.272Z",
+      "status": "completed",
+      "id": "qOLQgfA0ZDY"
+    },
+    {
+      "userId": "neOF4tln5Gk",
+      "username": "Shiva",
+      "email": "shiva@mail.com",
+      "phone": "8776787987",
+      "vehicleName": "Verna",
+      "vehicleNumber": "TN :49 6500",
+      "selectedHours": 2,
+      "pricePerHour": 30,
+      "totalAmount": 60,
+      "slotNumber": "A1",
+      "floor": 3,
+      "slotId": "36",
+      "parkingName": "Express Avenue",
+      "parkingLocation": "Royapettah, Chennai",
+      "startTime": "2026-05-17T09:00:03.514Z",
+      "endTime": "2026-05-17T11:00:03.514Z",
+      "bookingDate": "2026-05-17T09:00:03.515Z",
+      "status": "completed",
+      "id": "QZSGecf7eqE"
+    },
+    {
+      "userId": "zt7dZGf2Jac",
+      "username": "Shiva",
+      "email": "Shiva@mail.com",
+      "phone": "9876543210",
+      "vehicleName": "Fiat",
+      "vehicleNumber": "67We55",
+      "selectedHours": 4,
+      "pricePerHour": 30,
+      "totalAmount": 120,
+      "slotNumber": "A3",
+      "floor": 3,
+      "slotId": "38",
+      "parkingName": "Express Avenue",
+      "parkingLocation": "Royapettah, Chennai",
+      "startTime": "2026-05-18T07:49:12.962Z",
+      "endTime": "2026-05-18T11:49:12.962Z",
+      "bookingDate": "2026-05-18T07:49:12.963Z",
+      "status": "completed",
+      "id": "MDY3xbTQPEU"
+    },
+    {
+      "userId": "c7LJjMzYzZI",
+      "username": "Abinaya",
+      "email": "abi@mail.com",
+      "phone": "9876543210",
+      "vehicleName": "Audi",
+      "vehicleNumber": "DG6578",
+      "selectedHours": 2,
+      "pricePerHour": 30,
+      "totalAmount": 60,
+      "slotNumber": "A1",
+      "floor": 3,
+      "slotId": "11",
+      "parkingName": "Phoenix Mall",
+      "parkingLocation": "Velachery, Chennai",
+      "startTime": "2026-05-22T10:45:24.988Z",
+      "endTime": "2026-05-22T12:45:24.988Z",
+      "bookingDate": "2026-05-22T10:45:24.988Z",
+      "status": "booked",
+      "id": "LmM9Y_fCrKA"
+    }
+  ],
+  "contactMessages": [
+    {
+      "name": "Abinaya",
+      "email": "abi@mail.com",
+      "message": "Good service!",
+      "createdAt": "2026-05-18T07:46:47.189Z",
+      "id": "9JJPS0Bv5Z0"
+    },
+    {
+      "name": "Abinaya",
+      "email": "darwi@mail.com",
+      "message": "niice",
+      "createdAt": "2026-05-18T08:28:40.634Z",
+      "id": "eY2e1EDmmCI"
+    },
+    {
+      "name": "ABINAYA THIRUMARAN",
+      "email": "abi@mail.com",
+      "message": "nice",
+      "createdAt": "2026-05-22T10:45:59.399Z",
+      "id": "P_lXFcsi1Vg"
+    }
+  ],
+  "favourites": [
+    {
+      "userId": "c7LJjMzYzZI",
+      "lotId": "1",
+      "lot": {
+        "id": "1",
+        "name": "Phoenix Mall",
+        "location": "Velachery, Chennai",
+        "image": "https://i.pinimg.com/1200x/c8/6a/62/c86a62720250bf9ebca9dc6717725767.jpg"
+      },
+      "id": "Ax2KBph_aho"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
