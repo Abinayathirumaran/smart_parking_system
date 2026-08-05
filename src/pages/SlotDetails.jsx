@@ -1,86 +1,144 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import Navbar from '../components/Navbar';
-import { useNavigate } from 'react-router-dom';
-
-
-
+import { getUser } from '../services/auth';
+import Swal from 'sweetalert2';
 
 function SlotDetails() {
-
   const { id } = useParams();
-  const navigate = useNavigate()
-  const [lot, setLot] = useState(null)
-  const [slots, setSlots] = useState([])
+  const navigate = useNavigate();
 
-  // selected slot state
-  const [selectedSlot, setSelectedSlot] = useState(null)
+  // get user and role 
+  const user = getUser();
+  const isAdmin = user?.role === "admin";
 
+  // STATES
+  const [lot, setLot] = useState(null);
+  const [slots, setSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchLot = async () => {
-      const response = await API.get(`/parkingLots/${id}`)
-      setLot(response.data)
+    const fetchLotAndSlots = async () => {
+      try {
+        setLoading(true);
 
-      const slotResponse = await API.get(`/slots?parkingId=${id}`)    //give me only slots that belong to parking lot id
-      setSlots(slotResponse.data)
-    }
+        // Fetch lot details and slots simultaneously
+        const [lotRes, slotsRes] = await Promise.all([
+          API.get(`/api/parking/parkingLots/${id}`),
+          API.get(`/api/parking/${id}/slots`)
+        ]);
 
-    fetchLot()
+        setLot(lotRes.data);
+        setSlots(slotsRes.data || []);
+      } catch (err) {
+        setError("Failed to load parking lot details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLotAndSlots();
   }, [id]);
 
-
-  if (!lot) {
+  if (loading) {
     return (
-      <div className='min-h-screen bg-slate-950 text-white flex items-center justify-center'>Loading...</div>
-    )
+      <div className='min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center gap-3'>
+        <div className="w-10 h-10 border-4 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin"></div>
+        <p className="text-cyan-400 font-medium text-sm animate-pulse">Loading parking layout...</p>
+      </div>
+    );
   }
 
-  //for loop for grouping data
-
-  const groupedSlots = {}                                    //empty object created to store slots grouped by floor
-
-  for (let i = 0; i < slots.length; i++) {                  //loop start from first slot and go till last slot one by one
-    const slot = slots[i]                                   //take the slot at position i from the array and store it in a variable called slot
-
-    if (!groupedSlots[slot.floor]) {                         //if this floor does not already exist in the grouped object
-      groupedSlots[slot.floor] = []                          //create an empty array for this floor in groupedSlots
-
-    }
-
-    groupedSlots[slot.floor].push(slot)
-
-    // console.log(groupedSlots)
+  if (error || !lot) {
+    return (
+      <div className='min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center gap-4 p-4'>
+        <p className='text-red-400 bg-red-500/10 border border-red-500/20 px-6 py-3 rounded-xl'>
+          {error || "Parking lot not found."}
+        </p>
+        <button
+          onClick={() => navigate('/slotarea')}
+          className='bg-cyan-400 text-black px-4 py-2 rounded-lg font-semibold cursor-pointer'
+        >
+          Back to Slot Area
+        </button>
+      </div>
+    );
   }
 
-  const totalFloors = Object.keys(groupedSlots).length                //object gives a keys of an object as a array["1","2","3"]
-  const totalSlots = slots.length
+  // Group slots by floor using reduce 
+  const groupedSlots = slots.reduce((acc, slot) => {
+    const floorKey = slot.floor || "1";
+    if (!acc[floorKey]) acc[floorKey] = [];
+    acc[floorKey].push(slot);
+    return acc;
+  }, {});
 
-  console.log(totalSlots)
+  const totalFloors = Object.keys(groupedSlots).length;
+  const totalSlots = slots.length;
 
-  //check the credentials for proceed booking
   const handleBooking = () => {
-
-    const user = JSON.parse(localStorage.getItem("userData"));
-
-    // NOT LOGGED IN
-    if (!user) {
-
-      alert("Please login to continue booking");
-
-      navigate("/login", {
-        state: {
-          from: "/booking",
-          lot,
-          selectedSlot
+    // 🛑 Direct Guard: Block booking if slot is under maintenance (with responsive alert sizing)
+    if (selectedSlot?.status === 'maintenance') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unavailable',
+        text: 'This slot is currently under maintenance.',
+        background: '#0f172a',
+        color: '#ffffff',
+        confirmButtonColor: '#06b6d4',
+        width: 'auto',
+        customClass: {
+          popup: 'w-[90vw] max-w-xs sm:max-w-sm p-4 rounded-xl border border-red-500/30 shadow-xl',
+          title: 'text-base sm:text-lg font-semibold',
+          htmlContainer: 'text-xs sm:text-sm text-gray-300',
+          confirmButton: 'text-xs sm:text-sm px-4 py-2 font-medium rounded-lg'
         }
       });
-
       return;
     }
 
-    // LOGGED IN
+    const currentUser = getUser();
+
+    // 🛑 Responsive SweetAlert for unauthorized / unauthenticated user
+    if (!currentUser) {
+      Swal.fire({
+        title: 'Login Required',
+        text: 'You need to be logged in to proceed with your booking.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#06b6d4', // Cyan theme
+        cancelButtonColor: '#475569',  // Slate gray
+        confirmButtonText: 'Log In',
+        cancelButtonText: 'Cancel',
+        background: '#0f172a',         // Slate-900 matching theme
+        color: '#ffffff',
+        width: 'auto',
+        customClass: {
+          popup: 'w-[90vw] max-w-xs sm:max-w-sm md:max-w-md p-5 rounded-2xl border border-cyan-500/30 shadow-2xl',
+          title: 'text-base sm:text-lg font-bold text-white',
+          htmlContainer: 'text-xs sm:text-sm text-gray-300 my-2',
+          actions: 'gap-2 mt-3',
+          confirmButton: 'text-xs sm:text-sm px-4 py-2 font-semibold rounded-lg',
+          cancelButton: 'text-xs sm:text-sm px-4 py-2 font-semibold rounded-lg'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", {
+            state: {
+              from: `/slotarea/${id}`,
+              lot,
+              selectedSlot
+            }
+          });
+        }
+      });
+      return;
+    }
+
+    // Proceed if logged in
     navigate("/booking", {
       state: {
         lot,
@@ -91,98 +149,134 @@ function SlotDetails() {
 
   return (
     <div className='min-h-screen bg-slate-950 text-white'>
-      {/* navbar */}
       <Navbar />
-      <div className='flex flex-col lg:flex-row gap-6 p-6'>
 
-        <div className='lg:w-1/2 w-full bg-white/5 p-6 rounded-2xl border border-white/10'>
-          {/* left pannel */}
-          {/* img,name,location */}
-          <img src={lot.image} alt="mall image" className='w-full h-52 min-h-52 max-h-52  object-cover rounded-xl mb-4' />
+      <div className='flex flex-col lg:flex-row gap-6 p-6 max-w-7xl mx-auto'>
+
+        {/* Left Panel */}
+        <div className='lg:w-1/2 w-full bg-white/5 p-6 rounded-2xl border border-white/10 h-fit'>
+          <img
+            src={lot.image || "https://placehold.co/400x200/0f172a/22d3ee?text=Parking+Lot"}
+            alt={lot.name}
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src = "https://placehold.co/400x200/0f172a/22d3ee?text=Parking+Lot";
+            }}
+            className='w-full h-52 object-cover rounded-xl mb-4'
+          />
 
           <h1 className='text-2xl font-bold text-cyan-400'>{lot.name}</h1>
-          <p className='text-gray-300 mb-4'> {lot.location}</p>
+          <p className='text-gray-300 mb-4'>{lot.location}</p>
 
-          {/* total floors and slots */}
-          <div className='space-y-3 text-sm'>
+          <div className='space-y-2 text-sm border-t border-white/10 pt-4 mb-4'>
             <p><span className='text-gray-400'>Total Floors: </span>{totalFloors}</p>
             <p><span className='text-gray-400'>Total Slots: </span>{totalSlots}</p>
           </div>
 
-          {/* indicator */}
-          <div className='flex gap-4 mt-6 text-sm'>
-            <div className='flex items-center gap-2'>
-              <div className='w-4 h-4 bg-green-500 rounded'></div>
-              <p>Available</p>
+          {/* Admin mode */}
+          {isAdmin && (
+            <div className='mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 text-xs text-center font-medium'>
+              🛡️ Admin View Mode: You can monitor slot availability, but slot selection and booking are disabled.
             </div>
+          )}
 
-
+          {/* Status Indicator Legend */}
+          <div className='flex flex-wrap gap-4 text-xs bg-slate-900/60 p-3 rounded-xl border border-white/5'>
             <div className='flex items-center gap-2'>
-              <div className='w-4 h-4 bg-red-500 rounded'></div>
-              <p>Booked</p>
+              <div className='w-3.5 h-3.5 bg-green-500/30 border border-green-400 rounded'></div>
+              <p className='text-gray-300'>Available</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <div className='w-3.5 h-3.5 bg-red-500/30 border border-red-400 rounded'></div>
+              <p className='text-gray-300'>Booked</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <div className='w-3.5 h-3.5 bg-amber-500/30 border border-amber-400 rounded'></div>
+              <p className='text-gray-300'>Maintenance</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <div className='w-3.5 h-3.5 bg-cyan-400 rounded'></div>
+              <p className='text-gray-300'>Selected</p>
             </div>
           </div>
-          {
-            selectedSlot && (
-              <div className='mt-2 bg-cyan-500/10 border border-cyan-400/30 p-4 rounded-xl min-w-[180px] h-fit'>
-                <h3 className='text-lg font-semibold text-cyan-400 mb-2'>Selected Slot</h3>
-                <p className='text-sm'>
-                  <span className='font-semibold text-white'>{""}{selectedSlot.slotNumber}</span> </p>
-                <p className='text-sm mt-1'> <span className='font-semibold text-white'>{""}{selectedSlot.floor}</span></p>
-                <button onClick={() => handleBooking()} className=' cursor-pointer mt-4 bg-cyan-400 text-black px-5 py-2 rounded-lg font-semibold'>Proceed to Booking</button>
-              </div>
-            )
-          }
 
+          {/* Selected Slot Action Box */}
+          {selectedSlot && !isAdmin && (
+            <div className='mt-6 bg-cyan-500/10 border border-cyan-400/30 p-5 rounded-xl'>
+              <h3 className='text-base font-semibold text-cyan-400 mb-2'>Selected Slot Details</h3>
+              <p className='text-sm text-gray-300'>Slot Number: <span className='font-bold text-white'>{selectedSlot.slotNumber}</span></p>
+              <p className='text-sm text-gray-300 mt-1'>Floor: <span className='font-bold text-white'>{selectedSlot.floor}</span></p>
+
+              <button
+                onClick={handleBooking}
+                className='w-full mt-4 bg-cyan-400 text-black py-2.5 rounded-lg font-bold hover:bg-cyan-300 transition duration-300 cursor-pointer'
+              >
+                Proceed to Booking
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Right pannel */}
-        <div className='lg:w-1/2 w-full pr-2'>
+        {/* Right Panel - Map Grid View */}
+        <div className='lg:w-1/2 w-full'>
+          <h2 className='text-xl font-bold mb-4 text-gray-200'>Map View</h2>
 
-          <h2 className='text-xl font-bold mb-4'>Map view</h2>
-          {
-            Object.keys(groupedSlots).map(floor => (
-              <div key={floor} className='mb-6'>
-                <h3 className='mb-2 font-semibold'>Floor {floor}</h3>
+          {Object.keys(groupedSlots).length === 0 ? (
+            <div className='bg-white/5 border border-white/10 rounded-2xl p-8 text-center flex flex-col items-center justify-center gap-3'>
+              <div className='w-12 h-12 rounded-full bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center text-cyan-400 text-xl font-bold'>
+                P
+              </div>
+              <h3 className='text-lg font-semibold text-gray-200'>No Slots Configured</h3>
+              <p className='text-gray-400 text-sm max-w-sm'>
+                There are currently no slots added for this parking location.
+              </p>
+            </div>
+          ) : (
+            Object.keys(groupedSlots).map((floor) => (
+              <div key={floor} className='mb-6 bg-white/5 p-4 rounded-2xl border border-white/10'>
+                <h3 className='mb-3 font-semibold text-cyan-400 text-sm uppercase tracking-wider'>
+                  Floor {floor}
+                </h3>
 
+                <div className='grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-5 gap-2.5'>
+                  {groupedSlots[floor].map((slot) => {
+                    const slotId = slot._id || slot.id;
+                    const isBooked = slot.status === "booked";
+                    const isMaintenance = slot.status === "maintenance";
+                    const isSelected = (selectedSlot?._id || selectedSlot?.id) === slotId;
 
-                {/* grid-view */}
-                <div className='grid grid-cols-5 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-5 gap-2'>
-                  {groupedSlots[floor].map(slot => (                            //floor comes from previous above map 
-                    <div key={slot.id}
-
-                      onClick={() => {
-                        if (slot.status === "available") {
-                          setSelectedSlot(slot)                       //one single object from array
-                        }
-                      }}
-
-                      className={`cursor-pointer py-2 px-1 rounded-md text-center font-semibold border text-[10px]
-                      ${slot.status === "booked" ? "bg-red-500/30 border-red-400 text-red-200" : "bg-green-500/30 border-green-400 text-green-200"
-                        }
-
-                        ${selectedSlot?.id === slot.id ? "ring-2 ring-cyan-400" : ""}        
-
-                    `}>
-                      {slot.slotNumber}
-                    </div>
-                  ))
-                  }
+                    return (
+                      <button
+                        key={slotId}
+                        disabled={isBooked || isMaintenance || isAdmin}
+                        onClick={() => {
+                          setSelectedSlot(isSelected ? null : slot);
+                        }}
+                        className={`py-3 px-1 rounded-lg text-center font-bold text-xs border transition-all duration-200 ${
+                          isMaintenance
+                            ? "bg-amber-500/20 border-amber-500/40 text-amber-300 cursor-not-allowed opacity-70"
+                            : isBooked
+                            ? "bg-red-500/20 border-red-500/40 text-red-300 cursor-not-allowed opacity-60"
+                            : isAdmin
+                            ? "bg-green-500/10 border-green-500/20 text-green-400 cursor-not-allowed opacity-75"
+                            : isSelected
+                            ? "bg-cyan-400 text-black border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.4)] scale-105"
+                            : "bg-green-500/20 border-green-500/40 text-green-300 hover:border-green-400 cursor-pointer"
+                        }`}
+                      >
+                        {slot.slotNumber}
+                      </button>
+                    );
+                  })}
                 </div>
-
               </div>
             ))
-          }
-
-
+          )}
         </div>
-
-
 
       </div>
     </div>
-
-  )
+  );
 }
 
-export default SlotDetails  
+export default SlotDetails;

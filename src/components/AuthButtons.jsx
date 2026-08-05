@@ -41,12 +41,25 @@ function AuthButtons() {
     // Logged in user
     if (user) {
         return (
+
+            <div className="flex items-center gap-3">
+
+            {/* display the active username and a colored role badge */}
+            <div className="hidden sm:flex flex-col items-end">
+                <span className="text-sm font-medium text-gray-200">{user.username}</span>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded border uppercase font-bold ${
+                    user.role === 'admin'  ? 'bg-amber-500/10 text-amber-400 border-amber-500/30': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30'
+                }`}>
+                    {user.role}
+                </span>
+            </div>
             <button type="button"
                 onClick={handleLogout}
                 className="cursor-pointer bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300"
             >
                 Logout
             </button>
+            </div>
         );
     }
 

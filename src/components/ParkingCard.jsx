@@ -1,128 +1,77 @@
-import React, { useState, useEffect } from 'react'
-import { FiHeart } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
-import { getUser } from "../services/auth";
+import React from 'react';
 import API from '../services/api';
+import { getUser } from '../services/auth';
 
-function ParkingCard({ lot, onView, removeFavourite, isFavouriteProp }) {
+function ParkingCard({ lot, onView, isFavorite = false, onToggleFavorite }) {
 
-  // fav state
-  const [isFavourite, setIsFavourite] = useState(
-    isFavouriteProp || false
-  );
+  // extract MongoDB ID safely (_id or id)
+  const lotId = lot._id || lot.id;
+  const user = getUser();
 
-  useEffect(() => {
-    setIsFavourite(isFavouriteProp || false);
-  }, [isFavouriteProp]);
+  // Safely check if user is logged in and not an admin
+  // (Treats standard users as non-admins even if 'role' field is undefined)
+  const isRegularUser = Boolean(user && user.role !== 'admin');
 
-  //when page loads hearts stays filled
-  useEffect(() => {
-    const fetchFav = async () => {
-      const user = getUser();
-      if (!user) return;
-
-      try {
-        const res = await API.get("/favourites");
-        const exists = res.data.find(
-          (item) => String(item.lotId) === String(lot.id) &&
-            String(item.userId) === String(user.id)
-        );
-        setIsFavourite(!!exists);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchFav();
-
-  }, [lot.id]);
-
-  // toggle fav func
-  const handleFavourite = async (e) => {
-
-    e.preventDefault();
-    e.stopPropagation()
-
-
-    const user = getUser();
-    // If not logged in
-    if (!user) {
-      alert("Please login to add favourites");
-      return;
+  const handleHeartClick = (e) => {
+    e.stopPropagation();
+    if (onToggleFavorite) {
+      onToggleFavorite(lotId);
     }
-
-    try {
-      const res = await API.get("/favourites");
-
-      const exists = res.data.find(
-        (item) => String(item.lotId) === String(lot.id) &&
-          String(item.userId) === String(user.id)
-      );
-
-      if (exists) {
-        // remove
-        await API.delete(`/favourites/${exists.id}`);
-        setIsFavourite((prev) => !prev);
-
-        if (removeFavourite) {
-          removeFavourite(lot.id);
-        }
-
-      } else {
-        // add
-        await API.post("/favourites", {
-          userId: user.id,
-          lotId: lot.id,
-          lot
-        });
-        setIsFavourite((prev) => !prev);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-
   };
 
   return (
-    <div className='bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.10)] hover:shadow-[0_0_35px_rgba(34,211,238,0.20)] hover:-translate-y-1
-    transition-all duration-300 flex flex-col'>
-      {/* image */}
-      <div className="relative h-52 w-full overflow-hidden">
-        <img src={lot.image} alt={lot.name} className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+    <div className='bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.10)] hover:shadow-[0_0_35px_rgba(34,211,238,0.20)] hover:-translate-y-1 transition-all duration-300 flex flex-col w-full max-w-sm mx-auto relative group'>
+      
+      {/* lot image - reduced height to make card compact */}
+      <div className="relative h-36 w-full overflow-hidden bg-slate-900">
+        <img src={lot.image || "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=600&q=80"} alt={lot.name}
+          className="w-full h-full object-cover hover:scale-105 transition duration-500" />
 
-        {/* fav-button */}
-        <button type="button" onClick={handleFavourite} className='cursor-pointer absolute top-3 right-3 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex
-        items-center justify-center text-white '>
-          {isFavourite ? (
-            <FaHeart className="text-cyan-500 fill-cyan-500 text-xl" size={18} />
-          ) : (
-            <FiHeart className="text-white text-xl" size={18} />
-          )}
+        {/* Heart Icon Button - Rendered for logged-in non-admin users */}
+        {isRegularUser && (
+          <button
+            type="button"
+            onClick={handleHeartClick}
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+            className="absolute top-3 right-3 p-2 rounded-full bg-slate-900/70 hover:bg-slate-900 backdrop-blur-md border border-white/20 transition duration-300 cursor-pointer text-cyan-400 hover:scale-110 z-10"
+          >
+            {isFavorite ? (
+              // Filled Cyan Heart
+              <svg className="w-5 h-5 fill-cyan-400 stroke-cyan-400" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            ) : (
+              // Unfilled Heart Outline
+              <svg className="w-5 h-5 fill-transparent stroke-white group-hover:stroke-cyan-400 transition" viewBox="0 0 24 24" strokeWidth="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+            )}
+          </button>
+        )}
+      </div>
+
+      {/* Details */}
+      <div className='flex flex-col flex-1 p-4'>
+        {/* Title */}
+        <div className='mb-1'>
+          <h2 className='text-lg font-bold text-cyan-400'>{lot.name}</h2>
+        </div>
+
+        {/* Location */}
+        <p className='text-gray-400 text-xs mb-4'>{lot.location}</p>
+
+        {/* Action button */}
+        <button 
+          onClick={() => onView && onView(lotId)} 
+          className='mt-auto w-full bg-cyan-400 text-black py-2.5 rounded-xl font-semibold hover:bg-cyan-300 hover:scale-[1.02] transition duration-300 cursor-pointer text-sm'
+        >
+          View Slots
         </button>
+
       </div>
-
-      <div className='flex flex-col flex-1 p-5'>
-        {/* title */}
-        <div className='mb-4'>
-          <h2 className='text-xl font-bold text-cyan-400'>{lot.name}</h2>
-        </div>
-
-        <p className='text-gray-400 text-sm mt-2'>{lot.location}</p>
-
-        {/* infos */}
-        <div className='flex justify-between items-center bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 mb-5'>
-          <p className='text-gray-300 text-sm'>Total Slots</p>
-          <span className='bg-green-500/20 text-green-300 px-3 py-1 rounded-full text-sm border border-green-400'>25 Slots</span>
-        </div>
-      </div>
-
-
-
-      {/* button */}
-      <button onClick={() => onView(lot.id)} className='mt-auto w-full bg-cyan-400 text-black py-3 rounded-xl font-semibold hover:bg-cyan-300 hover:scale-[1.02]
-      transition duration-300 cursor-pointer'>View Slots</button>
 
     </div>
-  )
+  );
 }
 
-export default ParkingCard
+export default ParkingCard;

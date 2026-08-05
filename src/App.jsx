@@ -14,6 +14,8 @@ import "react-toastify/dist/ReactToastify.css"
 import SidebarLayout from './components/SidebarLayout';
 import Favourites from "./pages/Favourites";
 import Contact from './pages/Contact';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminAnalytics from "./components/AdminAnalytics";
 
 
 
@@ -25,17 +27,22 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-
-        <Route path='/dashboard' element={<ProtectedRoute><SidebarLayout><Dashboard /></SidebarLayout></ProtectedRoute>} />
         <Route path='/slotarea' element={<SlotArea />} />
         <Route path='/slotarea/:id' element={<SlotDetails />} />
-        <Route path='/booking' element={<ProtectedRoute><Booking /></ProtectedRoute>} />
-        <Route path="/favourites" element={<Favourites />} />
         <Route path="/contact" element={<Contact />} />
+
+        {/*Protected Routes */}
+
+        <Route path='/dashboard' element={<ProtectedRoute allowedRole="user"><SidebarLayout><Dashboard /></SidebarLayout></ProtectedRoute>} />
+        <Route path='/booking' element={<ProtectedRoute allowedRole="user"><Booking /></ProtectedRoute>} />
+        <Route path="/favourites" element={<ProtectedRoute allowedRole="user"><Favourites /></ProtectedRoute>} />
+        <Route path="/admin-dashboard" element={<ProtectedRoute allowedRole="admin"><SidebarLayout><AdminDashboard /></SidebarLayout></ProtectedRoute>} />
+        <Route path="/admin/analytics" element={<SidebarLayout><AdminAnalytics /></SidebarLayout>} />
+
       </Routes>
     </BrowserRouter>
 
-  ) 
+  )
 }
 
 export default App
